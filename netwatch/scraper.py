@@ -27,9 +27,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException
 
-from store import store
 
-class SiteData:    
+class SiteData:
     def __init__(self, id, link, selector="", html=None, hash=None):
         self.id = id
         self.link = link

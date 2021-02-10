@@ -19,7 +19,7 @@ from copy import deepcopy
 from secrets import token_hex
 from threading import Lock
 
-from models import Alert, Update
+from netwatch.models import Alert, Update
 
 
 UPDATES_FILENAME = r"netwatch/data/updates.json"

@@ -10,9 +10,9 @@ import hashlib
 
 import keyring
 
-import messenger
-import scraper
-from store import store
+import netwatch.messenger
+import netwatch.scraper
+from netwatch.store import store
 
 
 def process_alert(alert_ids):

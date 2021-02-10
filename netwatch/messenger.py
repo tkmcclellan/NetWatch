@@ -35,8 +35,6 @@ from envelopes import Envelope
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Content, Email, Mail, To
 
-from store import store
-
 
 def send_smtp_email(username, password, subject, body, recipient, smtp_addr):
     """Sends an email using SMTP

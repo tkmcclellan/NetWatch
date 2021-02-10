@@ -16,8 +16,8 @@ import threading
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from urllib.parse import parse_qs, urlparse
 
-from common import process_alert
-from store import store
+from netwatch.common import process_alert
+from netwatch.store import store
 
 
 class _MyHandler(SimpleHTTPRequestHandler):

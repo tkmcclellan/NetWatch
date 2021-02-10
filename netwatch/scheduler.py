@@ -13,8 +13,8 @@ from datetime import datetime
 
 from croniter import croniter
 
-from common import process_alert
-from store import store
+from netwatch.common import process_alert
+from netwatch.store import store
 
 
 class Scheduler:

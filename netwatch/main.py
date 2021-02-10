@@ -1,10 +1,9 @@
 from argparse import ArgumentParser
 
-from gui import GUI, config_window
-from common import process_alert
-from scheduler import Scheduler
-from server import Server
-from store import store
+from netwatch.gui import GUI, config_window
+from netwatch.scheduler import Scheduler
+from netwatch.server import Server
+from netwatch.store import store
 
 
 def run(enable_gui=False, enable_scheduler=True):
@@ -27,7 +26,7 @@ def run(enable_gui=False, enable_scheduler=True):
         except KeyboardInterrupt:
             pass
     print("Shutting down...")
-    if args.enable_scheduler:
+    if enable_scheduler:
         scheduler.stop()
     server.stop()
     store.save()
