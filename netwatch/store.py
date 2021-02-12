@@ -43,7 +43,7 @@ class Store:
 
     def __init__(self):
         if "data" not in os.listdir("netwatch"):
-            os.mkdir("data")
+            os.mkdir("netwatch/data")
         self.updates = [
             Update(i["text"], i["link"]) for i in _read_json(UPDATES_FILENAME, [])
         ]
