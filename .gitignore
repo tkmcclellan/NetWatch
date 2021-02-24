@@ -106,4 +106,4 @@ ENV/
 .vscode/
 
 # User data
-netwatch/data/*
+netwatch/data

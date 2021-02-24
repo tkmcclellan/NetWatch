@@ -31,7 +31,7 @@ def process_alert(alert_ids):
     """
 
     alerts = store.get_alerts(alert_ids)
-    site_data = scraper.fetch_site_html([scraper.SiteData(
+    site_data = netwatch.scraper.fetch_site_html([netwatch.scraper.SiteData(
         id=alert.id,
         link=alert.link,
         selector=alert.selector,
@@ -77,7 +77,7 @@ def send_notifications(alerts, sender="smtp", smtp_addr="smtp.googlemail.com"):
             body = "{} - {}".format(alert.alert, alert.link)
 
             if sender == "smtp":
-                messenger.send_smtp_email(
+                netwatch.messenger.send_smtp_email(
                     username=store.get_config("username"),
                     password=password,
                     subject="NetWatch",
@@ -86,7 +86,7 @@ def send_notifications(alerts, sender="smtp", smtp_addr="smtp.googlemail.com"):
                     smtp_addr=smtp_addr,
                 )
             elif sender == "sendgrid":
-                messenger.send_sendgrid_email(
+                netwatch.messenger.send_sendgrid_email(
                     username=store.get_config("username"),
                     api_key=sendgrid_api_key,
                     subject="NetWatch",

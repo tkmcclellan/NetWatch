@@ -4,9 +4,10 @@ This module loads, saves, and allows thread-safe access
 and manipulation of NetWatch updates and alerts.
 
 Attributes:
-    UPDATES_FILENAME (str): Filename for NetWatch Updates.
-    ALERTS_FILENAME (str): Filename for NetWatch Alerts.
-    CONFIG_FILENAME (str): Filename for NetWatch configuration.
+    PARENT_DIR (Path): File path for NetWatch parent directory.
+    UPDATES_FILENAME (Path): File path for NetWatch Updates.
+    ALERTS_FILENAME (Path): File path for NetWatch Alerts.
+    CONFIG_FILENAME (Path): File path for NetWatch configuration.
     store (Store): Singleton instance of datastore.
 
 Todo:
@@ -16,15 +17,16 @@ Todo:
 import json
 import os
 from copy import deepcopy
+from pathlib import Path
 from secrets import token_hex
 from threading import Lock
 
 from netwatch.models import Alert, Update
 
-
-UPDATES_FILENAME = r"netwatch/data/updates.json"
-ALERTS_FILENAME = r"netwatch/data/alerts.json"
-CONFIG_FILENAME = r"netwatch/data/config.json"
+PARENT_DIR = Path(__file__).parent
+UPDATES_FILENAME = PARENT_DIR / "data" / "updates.json"
+ALERTS_FILENAME = PARENT_DIR / "data" / "alerts.json"
+CONFIG_FILENAME = PARENT_DIR / "data" / "config.json"
 
 
 class Store:
@@ -42,8 +44,8 @@ class Store:
     """
 
     def __init__(self):
-        if "data" not in os.listdir("netwatch"):
-            os.mkdir("netwatch/data")
+        if "data" not in os.listdir(PARENT_DIR):
+            os.mkdir(PARENT_DIR / "data")
         self.updates = [
             Update(i["text"], i["link"]) for i in _read_json(UPDATES_FILENAME, [])
         ]
