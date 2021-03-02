@@ -256,12 +256,6 @@ class GUI:
                                         ),
                                         sg.Column(
                                             [
-                                                [sg.Text("Alerts")],
-                                                [
-                                                    sg.Text(
-                                                        "Name | Description | Alert | Link | Selector | Hash | Frequency | Email | Recipient | Content Type"
-                                                    )
-                                                ],
                                                 [
                                                     sg.Listbox(
                                                         values=self.format_alerts(),
@@ -709,10 +703,9 @@ class GUI:
 
     def format_alerts(self):
         if self.alerts:
-            values = [
-                [str(v) for k, v in alert.items() if k != "id"] for alert in self.alerts
+            return [
+                alert["name"] + ' | ' + alert["description"] for alert in self.alerts
             ]
-            return [" | ".join(v) for v in values]
         else:
             return []
 
