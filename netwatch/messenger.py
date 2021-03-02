@@ -4,14 +4,11 @@ This module allows for sending email and (in the near future)
 text notifications with a variety of service providers.
 
 Example:
-    This module can be used from the command line and as an import.
-    Command line example::
+    Command-line usage::
 
-        $ python messenger.py --username e@mail.com --password 1234 \
-            --body "ody ody ody" --subject Subject --recipient u@mail.com \
-            --smtp_addr smtp.googlemail.com
+        $ python -m netwatch --messenger --username e@mail.com --password 1234 --body "ody ody ody" --subject Testing --recipient u@mail.com
 
-    Import example::
+    Import usage::
 
         >>> import messenger
         >>> messenger.send_smtp_email(
@@ -27,8 +24,6 @@ Todo:
     * Add SMS gateway support
     * Add Twilio SMS support
 """
-
-from argparse import ArgumentParser
 
 import keyring
 from envelopes import Envelope
@@ -86,40 +81,3 @@ def send_sendgrid_email(username, api_key, subject, body, recipient, body_type):
     content = Content(body_type, body)
     mail = Mail(from_email, to_email, subject, content)
     sg.client.mail.send.post(request_body=mail.get())
-
-
-if __name__ == "__main__":
-    parser = ArgumentParser()
-    parser.add_argument(
-        "--email_client", help="SMTP or SendGrid", default="smtp")
-    parser.add_argument("--username", help="The sender's email address")
-    parser.add_argument(
-        "--password", help="The sender's email password", default=None)
-    parser.add_argument("--api_key", help="SendGrid API Key", default=None)
-    parser.add_argument("--body", help="Email body")
-    parser.add_argument("--subject", help="Email subject")
-    parser.add_argument("--recipient", help="Recipient email address")
-    parser.add_argument(
-        "--smtp_addr", help="SMTP email server address", default="smtp.googlemail.com"
-    )
-
-    args = parser.parse_args()
-
-    if args.email_client == "smtp":
-        send_smtp_email(
-            username=args.username,
-            password=args.password,
-            subject=args.subject,
-            body=args.body,
-            recipient=args.recipient,
-            smtp_addr=args.smtp_addr,
-        )
-    else:
-        send_sendgrid_email(
-            username=args.username,
-            api_key=args.api_key,
-            subject=args.subject,
-            body=args.body,
-            recipient=args.recipient,
-            body_type="text/plain"
-        )

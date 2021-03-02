@@ -10,11 +10,11 @@ To start the NetWatch server without a user interface::
 The server can be closed by entering Ctrl-C in the console.
 To start NetWatch with a user interface::
 
-    $ python -m netwatch --enable_gui True
+    $ python -m netwatch --enable_gui
 
 When the user interface is enabled, the server will automatically close with
 the GUI window.
-You can also use the --enable_scheduler argument to enable or disable NetWatch's
+You can also use the `--disable_scheduler` argument to disable NetWatch's
 alert scheduler.
 
 To start NetWatch from within a project::
