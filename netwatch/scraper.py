@@ -1,12 +1,11 @@
 """Module for retrieving HTML from static and dynamic websites.
 
 Example:
-    This module can be used as a standalone module or as an import.
-    Standalone example::
+    Command-line usage::
 
-        $ python scraper.py --link https://google.com --selector div 
+        $ python -m netwatch --scraper --link https://google.com --selector "div > p"
 
-    Import example::
+    Import usage::
 
         >>> import scraper
         >>> scraper.fetch_site_html(scraper.SiteData(
@@ -19,9 +18,6 @@ Example:
 Todo:
     * Add support for other browsers
 """
-
-from argparse import ArgumentParser
-from datetime import datetime
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -101,18 +97,3 @@ def fetch_site_html(
             driver = initialize_driver(chromedriver_path, driver_options)
     driver.close()
     return site_data
-
-
-if __name__ == "__main__":
-    parser = ArgumentParser()
-    parser.add_argument("--link")
-    parser.add_argument("--selector")
-    args = parser.parse_args()
-
-    data = fetch_site_html(SiteData(
-        id="",
-        link=args.link,
-        selector=args.selector
-    ))[0]
-
-    print("{} - {} - {}".format(args.link, args.selector, data.html))
