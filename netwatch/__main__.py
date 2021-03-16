@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from netwatch.main import run
 import netwatch.messenger
 import netwatch.scraper
-import netwatch.gui
+import netwatch.ui
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -71,6 +71,6 @@ if __name__ == "__main__":
 
         print("{} - {} - {}".format(args.link, args.selector, data.html))
     elif args.gui:
-        netwatch.gui.GUI()
+        netwatch.ui.GUI()
     else:
         run(enable_gui=args.enable_gui, disable_scheduler=args.disable_scheduler)
