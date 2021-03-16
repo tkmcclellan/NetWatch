@@ -1,6 +1,4 @@
-from argparse import ArgumentParser
-
-from netwatch.gui import GUI, config_window
+from netwatch.ui import GUI, config_window
 from netwatch.scheduler import Scheduler
 from netwatch.server import Server
 from netwatch.store import store
